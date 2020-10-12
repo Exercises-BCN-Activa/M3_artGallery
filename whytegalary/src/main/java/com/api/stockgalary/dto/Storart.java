@@ -37,7 +37,6 @@ public class Storart {
 	}
 
 	public Storart(Long id, String name, Integer capacity) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.capacity = capacity;

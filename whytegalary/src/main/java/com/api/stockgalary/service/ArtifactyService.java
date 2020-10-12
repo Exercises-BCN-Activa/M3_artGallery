@@ -31,14 +31,8 @@ public class ArtifactyService implements IService<Artifacty> {
 	}
 
 	@Override
-	public Artifacty updateOne(Long id, Artifacty updated) {
-		Artifacty toUpdate = dao.findById(id).get();
-		toUpdate.setAuthor(updated.getAuthor());
-		toUpdate.setTitle(updated.getTitle());
-		toUpdate.setValue(updated.getValue());
-		toUpdate.setShop(updated.getShop());
-		toUpdate.setUpdate();
-		return dao.save(toUpdate);
+	public Artifacty updateOne(Artifacty artifacty) {
+		return dao.save(artifacty);
 	}
 
 	@Override
@@ -46,12 +40,15 @@ public class ArtifactyService implements IService<Artifacty> {
 		dao.deleteById(id);
 	}
 
-	@Override
-	public String deleteAllAndEverything(String password) {
+	public String deleteAllAndEverything(Long shopId, String password) {
 		boolean erase = PASSWORD.equals(password);
-		if (erase) {dao.deleteAll();}
-		return erase ? "Opps! There was never anything here."
-			: "I'm really sorry, but I think you got it wrong";
+		if (erase) {
+			dao.findByShopId(shopId)
+				.forEach(x -> dao.deleteById(x.getId()));
+		}
+		return (erase && dao.findByShopId(shopId).isEmpty()) 
+					? "Opps! There was never anything here."
+						: "I'm really sorry, but I think you got it wrong";
 	}
 	
 	public List<Artifacty> readByAuthor(String name) {
@@ -81,5 +78,7 @@ public class ArtifactyService implements IService<Artifacty> {
 	public List<Artifacty> readByValueGreaterThan(BigDecimal value) {
 		return dao.findByValueGreaterThan(value);
 	}
+	
+	private final String PASSWORD = "Incendiar Quadres";
 
 }

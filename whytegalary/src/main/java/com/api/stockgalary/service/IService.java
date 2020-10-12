@@ -12,12 +12,8 @@ interface IService<T> {
 
 	public T readOne(Long id); // Read One Item
 
-	public T updateOne(Long id, T item); // Update One Item
+	public T updateOne(T item); // Update One Item
 
 	public void deleteOne(Long id); // Delete One Item
-
-	public String deleteAllAndEverything(String password); // Delete All Items
-	
-	final String PASSWORD = "Sense Deixar Rastre";
 
 }

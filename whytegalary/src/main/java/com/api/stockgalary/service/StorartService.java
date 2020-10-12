@@ -32,11 +32,8 @@ public final class StorartService implements IService<Storart> {
 	}
 
 	@Override
-	public Storart updateOne(Long id, Storart updated) {
-		Storart toUpdate = dao.findById(id).get();
-		toUpdate.setName(updated.getName());
-		toUpdate.setCapacity(updated.getCapacity());
-		return dao.save(toUpdate);
+	public Storart updateOne(Storart storart) {
+		return dao.save(storart);
 	}
 
 	@Override
@@ -44,7 +41,6 @@ public final class StorartService implements IService<Storart> {
 		dao.deleteById(id);
 	}
 
-	@Override
 	public String deleteAllAndEverything(String password) {
 		boolean erase = PASSWORD.equals(password);
 		if (erase) {dao.deleteAll();}
@@ -76,4 +72,5 @@ public final class StorartService implements IService<Storart> {
 		return dao.findDistinctByInventoryTitleContains(title);
 	}
 	
+	private final String PASSWORD = "Sense Deixar Rastre";
 }
