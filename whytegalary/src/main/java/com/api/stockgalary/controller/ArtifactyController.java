@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -75,6 +76,12 @@ final class ArtifactyController {
 	@DeleteMapping("/artefacts")
 	void delete(@RequestParam Long id) {
 		service.deleteOne(id);
+	}
+
+	@DeleteMapping("/artefacts/burn/{id}")
+	String ERASE(@PathVariable(name = "id") Long shopId,
+			@RequestParam(required = false) String password) {
+		return (shopId != null && password != null) ? service.deleteAllAndEverything(shopId, password) : null;
 	}
 
 	@SuppressWarnings("serial")

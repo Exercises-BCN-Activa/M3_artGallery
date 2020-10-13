@@ -3,23 +3,24 @@ DROP table IF EXISTS `store`;
 
 
 CREATE TABLE `store` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
   `name` varchar(250) DEFAULT NULL,
-  `capacity` int(11) DEFAULT NULL,
+  `capacity` INTEGER DEFAULT NULL,
   PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `product` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
   `creator` varchar(250) DEFAULT NULL,
   `name` varchar(250) DEFAULT NULL,
   `price` decimal(19,2) DEFAULT NULL,
-  `date` date DEFAULT CURRENT_TIMESTAMP,
-  `update_time` date DEFAULT NULL,
-  `update_score` int(11) DEFAULT NULL,
-  `store_id` int(11) DEFAULT NULL,
+  `date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `update_time` DATETIME DEFAULT NULL,
+  `update_score` INTEGER DEFAULT NULL,
+  `store_id` INTEGER DEFAULT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `product_fk` FOREIGN KEY (`store_id`) REFERENCES `store` (`id`)
+  ON DELETE CASCADE ON UPDATE CASCADE 
 );
 
 insert into store (name, capacity) values ('Whitart Galery Barcelona', 50);
@@ -58,4 +59,3 @@ insert into product (creator, name, price, store_id) values ('Salvador Dalí', '
 insert into product (creator, name, price, store_id) values ('Jackson Pollock', 'No. 5', 123456.54, 5);
 insert into product (creator, name, price, store_id) values ('Grant Wood', 'American Gothic', 234545.12, 5);
 insert into product (creator, name, price, store_id) values ('Gustav Klimt', 'O beijo', 123456.48, 5);
-
