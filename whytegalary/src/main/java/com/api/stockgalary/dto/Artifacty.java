@@ -24,7 +24,7 @@ public class Artifacty {
 	private Long id;
 
 	@Column(name = "creator")
-	private String author;
+	private String author = "unknown";
 
 	@Column(name = "name")
 	private String title;
@@ -32,14 +32,13 @@ public class Artifacty {
 	@Column(name = "price", scale = 2)
 	private BigDecimal value;
 
-	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date", updatable = false)
-	private Calendar registration;
-	
+	private final Calendar registration = Calendar.getInstance();;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "update_time")
 	private Calendar updateTime;
-	
+
 	@Column(name = "update_score")
 	private Integer updateScore = 0;
 
@@ -50,11 +49,11 @@ public class Artifacty {
 	public Artifacty() {
 	}
 
-	public Artifacty(Long id, String author, String title, BigDecimal value, Storart shop) {
+	public Artifacty(Long id, String author, String title, Double value, Storart shop) {
 		this.id = id;
-		this.author = (author.isEmpty() || author == null) ? "unknown" : author;
+		setAuthor(author);
 		this.title = title;
-		this.value = value;
+		this.value = new BigDecimal(value);
 	}
 
 	public Long getId() {
@@ -94,7 +93,7 @@ public class Artifacty {
 	}
 
 	public void setAuthor(String author) {
-		this.author = author;
+		this.author = (author == null || author.isEmpty()) ? "unknown" : author;
 	}
 
 	public void setTitle(String title) {
