@@ -15,12 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.api.stockgalary.dto.Storart;
 import com.api.stockgalary.service.StorartService;
+import com.api.stockgalary.util.*;
 
 @RestController
 @RequestMapping("/api")
 final class StorartController {
 
-	StorartController() {}
+	StorartController() {
+	}
 
 	@Autowired
 	private StorartService service;
@@ -38,78 +40,69 @@ final class StorartController {
 	@PutMapping("/galleries")
 	Storart update(@RequestParam Long id, @RequestBody Storart updated) {
 		Storart toUpdate = service.readOne(id);
-		toUpdate.setName(updated.getName());
-		toUpdate.setCapacity(updated.getCapacity());
-		return service.updateOne(toUpdate);
+		boolean ok = false;
+		if (toUpdate != null && updated != null) {
+			if (updated.getName() != null && !updated.getName().isEmpty()
+					&& !updated.getName().equalsIgnoreCase(toUpdate.getName())) {
+				toUpdate.setName(Inputs.toTitleCase(updated.getName()));
+				ok = true;
+			}
+			if (updated.getCapacity() != null && updated.getCapacity() != toUpdate.getCapacity()) {
+				toUpdate.setCapacity(updated.getCapacity());
+				ok = true;
+			}
+		}
+		return (toUpdate != null && ok) ? service.updateOne(toUpdate) : null;
 	}
 
 	@DeleteMapping("/galleries")
 	void delete(@RequestParam Long id) {
 		service.deleteOne(id);
 	}
-	
+
 	@SuppressWarnings("serial")
 	@GetMapping("/galleries/search")
 	List<Storart> search(@RequestParam String by, @RequestParam(required = false) String name,
-			@RequestParam(required = false) Long id, @RequestParam(required = false) Integer capacity,
-			@RequestParam(required = false) Integer min, @RequestParam(required = false) Integer max) {
-		switch (by) {
+			@RequestParam(required = false) Long id, @RequestParam(required = false) Integer min,
+			@RequestParam(required = false) Integer max) {
+
+		switch (by.toLowerCase()) {
+
 		case "name":
-			return name == null ? null : service.readByName(name);
+			return name == null ? null : service.readByName(Inputs.toTitleCase(name));
+
 		case "id":
-			return (id == null) ? null : new ArrayList<Storart>() {{add(service.readOne(id));}};
+			return (id == null) ? null : new ArrayList<Storart>() {
+				{
+					add(service.readOne(id));
+				}
+			};
+
 		case "capacity":
-			return (min == null && max == null) ? null : service.readByCapacityBetween(min, max);
-		case "less":
-			return capacity == null ? null : service.readByCapacityLessThan(capacity);
-		case "greater":
-			return capacity == null ? null : service.readByCapacityGreaterThan(capacity);
+			if (min == null && max == null) {
+				return null;
+			} else if (min != null && max != null) {
+				return service.readByCapacityBetween(min, max);
+			} else if (min != null && max == null) {
+				return service.readByCapacityGreaterThan(min);
+			} else if (min == null && max != null) {
+				return service.readByCapacityLessThan(max);
+			}
+
 		case "author":
-			return name == null ? null : service.readByArtifactyAuthor(name);
+			return name == null ? null : service.readByArtifactyAuthor(Inputs.toTitleCase(name));
+
 		case "title":
-			return name == null ? null : service.readByArtifactyTitle(name);
+			return name == null ? null : service.readByArtifactyTitle(Inputs.toTitleCase(name));
+
 		default:
 			return null;
 		}
 	}
 
 	@DeleteMapping("/galleries/run")
-	String ERASE(@RequestParam String password) {
+	String ERASE(@RequestParam(required = false) String password) {
 		return service.deleteAllAndEverything(password);
 	}
-	
-	@GetMapping("/galleries/")
-	Storart find(@RequestParam Long id) {
-		return service.readOne(id);
-	}
 
-	@GetMapping("/galleries/by")
-	List<Storart> searchByName(@RequestParam String name) {
-		return service.readByName(name);
-	}
-
-	@GetMapping("/galleries/capacity")
-	List<Storart> searchByCapacityBetween(@RequestParam Integer min, @RequestParam Integer max) {
-		return service.readByCapacityBetween(min, max);
-	}
-
-	@GetMapping("/galleries/lessThan")
-	List<Storart> searchByCapacityLess(@RequestParam Integer capacity) {
-		return service.readByCapacityLessThan(capacity);
-	}
-
-	@GetMapping("/galleries/greaterThan")
-	List<Storart> searchByCapacityGreater(@RequestParam Integer capacity) {
-		return service.readByCapacityGreaterThan(capacity);
-	}
-
-	@GetMapping("/galleries/byAuthor")
-	List<Storart> searchByArtist(@RequestParam String name) {
-		return service.readByArtifactyAuthor(name);
-	}
-
-	@GetMapping("/galleries/byTitle")
-	List<Storart> searchByTitle(@RequestParam String name) {
-		return service.readByArtifactyTitle(name);
-	}
 }

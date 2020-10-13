@@ -1,0 +1,639 @@
+{
+	"info": {
+		"_postman_id": "3b6677ed-6e81-4ebf-ad49-b2a8c317c18c",
+		"name": "IT Academy - M13",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Galleries",
+			"item": [
+				{
+					"name": "Read All",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}galleries",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}galleries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save One",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"BCN White Art\",\n\t\"capacity\": 33\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}galleries",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}galleries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update One",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"BCN WhiteGalery\",\n\t\"capacity\": 35\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}galleries?id=1",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}galleries"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete One",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "",
+								"type": "text",
+								"value": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"BCN WhiteGalery\",\n\t\"capacity\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}galleries?id=1",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}galleries"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}galleries/search?by=id&id=1",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}galleries"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "by",
+									"value": "id"
+								},
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by NAME",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}galleries/search?by=name&name=Bilbao",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}galleries"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "by",
+									"value": "name"
+								},
+								{
+									"key": "name",
+									"value": "Bilbao"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by CAPACITY BETWEEN",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}galleries/search?by=capacity&min=20&max=50",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}galleries"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "by",
+									"value": "capacity"
+								},
+								{
+									"key": "min",
+									"value": "20"
+								},
+								{
+									"key": "max",
+									"value": "50"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by CAPACITY LESS THAN",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}galleries/search?by=capacity&max=31",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}galleries"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "by",
+									"value": "capacity"
+								},
+								{
+									"key": "max",
+									"value": "31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by CAPACITY GREATER THAN",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}galleries/search?by=capacity&min=19",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}galleries"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "by",
+									"value": "capacity"
+								},
+								{
+									"key": "min",
+									"value": "19"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by AUTHOR",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}galleries/search/?by=author&name=Caravaggio",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}galleries"
+							],
+							"path": [
+								"search",
+								""
+							],
+							"query": [
+								{
+									"key": "by",
+									"value": "author"
+								},
+								{
+									"key": "name",
+									"value": "Caravaggio"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by TITLE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}galleries/search/?by=title&name=Mona",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}galleries"
+							],
+							"path": [
+								"search",
+								""
+							],
+							"query": [
+								{
+									"key": "by",
+									"value": "title"
+								},
+								{
+									"key": "name",
+									"value": "Mona"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fire in the role",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}galleries/run",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}galleries"
+							],
+							"path": [
+								"run"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Artefacts",
+			"item": [
+				{
+					"name": "Read All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}artefacts",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}artefacts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save One",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Mona Crespa\",\n\t\"value\": 987654.98\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}artefacts?id=1",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}artefacts"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update One",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}artefacts?id=31",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}artefacts"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "31"
+								},
+								{
+									"key": "author",
+									"value": "Fauno Guazina",
+									"disabled": true
+								},
+								{
+									"key": "title",
+									"value": "Mouna Liusa",
+									"disabled": true
+								},
+								{
+									"key": "shopId",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "value",
+									"value": "10000.00",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update One Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}artefacts?id=31",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}artefacts"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}artefacts/search?by=id&id=31",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}artefacts"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "by",
+									"value": "id"
+								},
+								{
+									"key": "id",
+									"value": "31"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by SHOP NAME",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}artefacts/search?by=shop&name=Barcelona",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}artefacts"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "by",
+									"value": "shop"
+								},
+								{
+									"key": "name",
+									"value": "Barcelona"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by SHOP ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}artefacts/search?by=shop&id=5",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}artefacts"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "by",
+									"value": "shop"
+								},
+								{
+									"key": "id",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by VALUE BETWEEN",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}artefacts/search?by=value&min=10000&max=100000",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}artefacts"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "by",
+									"value": "value"
+								},
+								{
+									"key": "min",
+									"value": "10000"
+								},
+								{
+									"key": "max",
+									"value": "100000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by VALUE LESS THAN",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}artefacts/search?by=value&max=100000",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}artefacts"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "by",
+									"value": "value"
+								},
+								{
+									"key": "max",
+									"value": "100000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by VALUE GEATER THAN",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}artefacts/search?by=value&min=1000000",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}artefacts"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "by",
+									"value": "value"
+								},
+								{
+									"key": "min",
+									"value": "1000000"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"variable": [
+		{
+			"id": "d9d0ebfc-e302-43ca-9e2b-758b0f294b0a",
+			"key": "IP",
+			"value": "localhost:"
+		},
+		{
+			"id": "4e6ed0a2-83d7-4bc3-94ba-e092d94533e7",
+			"key": "PORT",
+			"value": "8181"
+		},
+		{
+			"id": "45a3bcb5-71ab-4e17-9099-394dd15cd8d6",
+			"key": "API",
+			"value": "/api/"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

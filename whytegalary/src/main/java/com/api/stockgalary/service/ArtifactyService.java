@@ -43,42 +43,41 @@ public class ArtifactyService implements IService<Artifacty> {
 	public String deleteAllAndEverything(Long shopId, String password) {
 		boolean erase = PASSWORD.equals(password);
 		if (erase) {
-			dao.findByShopId(shopId)
-				.forEach(x -> dao.deleteById(x.getId()));
+			dao.findByShopId(shopId).forEach(x -> dao.deleteById(x.getId()));
 		}
 		return (erase && dao.findByShopId(shopId).isEmpty()) 
-					? "Opps! There was never anything here."
-						: "I'm really sorry, but I think you got it wrong";
+				? "Opps! There was never anything here."
+				: "I'm really sorry, but I think you got it wrong";
 	}
-	
+
 	public List<Artifacty> readByAuthor(String name) {
 		return dao.findByAuthorContains(name);
 	}
-	
+
 	public List<Artifacty> readByTitle(String title) {
 		return dao.findByTitleContains(title);
 	}
-	
+
 	public List<Artifacty> readByShopName(String name) {
 		return dao.findByShopNameContains(name);
 	}
-	
+
 	public List<Artifacty> readByShopId(Long id) {
 		return dao.findByShopId(id);
 	}
-	
+
 	public List<Artifacty> readByValueBetween(BigDecimal min, BigDecimal max) {
 		return dao.findByValueBetween(min, max);
 	}
-	
+
 	public List<Artifacty> readByValueLessThan(BigDecimal value) {
 		return dao.findByValueLessThan(value);
 	}
-	
+
 	public List<Artifacty> readByValueGreaterThan(BigDecimal value) {
 		return dao.findByValueGreaterThan(value);
 	}
-	
+
 	private final String PASSWORD = "Incendiar Quadres";
 
 }
