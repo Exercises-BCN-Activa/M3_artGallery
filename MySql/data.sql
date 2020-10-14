@@ -1,61 +1,96 @@
-DROP TABLE IF EXISTS `product`;
-DROP table IF EXISTS `store`;
+CREATE DATABASE  IF NOT EXISTS `m13` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `m13`;
+-- MySQL dump 10.13  Distrib 8.0.20, for macos10.15 (x86_64)
+--
+-- Host: 127.0.0.1    Database: m13
+-- ------------------------------------------------------
+-- Server version	8.0.20
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+--
+-- Table structure for table `store`
+--
+
+DROP TABLE IF EXISTS `store`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `store` (
-  `id` INTEGER NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(250) DEFAULT NULL,
-  `capacity` INTEGER DEFAULT NULL,
+  `capacity` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-);
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
+--
+-- Dumping data for table `store`
+--
+
+LOCK TABLES `store` WRITE;
+/*!40000 ALTER TABLE `store` DISABLE KEYS */;
+INSERT INTO `store` VALUES (11,'Whitart Galery Zaragoza',40),(12,'Whitart Galery Sevilla',30),(13,'Whitart Galery Bilbao',20),(14,'Whitart Galery Madrid',10),(15,'Whitart Galery Barcelona',50);
+/*!40000 ALTER TABLE `store` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+
+--
+-- Table structure for table `product`
+--
+
+DROP TABLE IF EXISTS `product`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product` (
-  `id` INTEGER NOT NULL AUTO_INCREMENT,
+  `id` int NOT NULL AUTO_INCREMENT,
   `creator` varchar(250) DEFAULT NULL,
   `name` varchar(250) DEFAULT NULL,
   `price` decimal(19,2) DEFAULT NULL,
-  `date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  `update_time` DATETIME DEFAULT NULL,
-  `update_score` INTEGER DEFAULT NULL,
-  `store_id` INTEGER DEFAULT NULL,
+  `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `update_time` datetime DEFAULT NULL,
+  `update_score` int DEFAULT NULL,
+  `store_id` int DEFAULT NULL,
   PRIMARY KEY (`id`),
-  CONSTRAINT `product_fk` FOREIGN KEY (`store_id`) REFERENCES `store` (`id`)
-  ON DELETE CASCADE ON UPDATE CASCADE 
-);
+  KEY `product_fk` (`store_id`),
+  CONSTRAINT `product_fk` FOREIGN KEY (`store_id`) REFERENCES `store` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
-insert into store (name, capacity) values ('Whitart Galery Barcelona', 50);
-insert into store (name, capacity) values ('Whitart Galery Zaragoza', 40);
-insert into store (name, capacity) values ('Whitart Galery Sevilla', 30);
-insert into store (name, capacity) values ('Whitart Galery Bilbao', 20);
-insert into store (name, capacity) values ('Whitart Galery Madrid', 10);
+--
+-- Dumping data for table `product`
+--
 
-insert into product (creator, name, price, store_id) values ('Leonardo da Vinci', 'Mona Lisa﻿', 765434.56, 1);
-insert into product (creator, name, price, store_id) values ('Michelangelo Buonarotti', 'A Criação de Adão', 93453.43, 1);
-insert into product (creator, name, price, store_id) values ('Caravaggio', 'Medusa', 598765.43, 1);
-insert into product (creator, name, price, store_id) values ('Diego Velázquez', 'As Meninas', 72345.43, 1);
-insert into product (creator, name, price, store_id) values ('Rembrandt', 'A Ronda Noturna', 8234565.43, 1);
-insert into product (creator, name, price, store_id) values ('Pablo Picasso', 'Guernica', 72345.43, 1);
-insert into product (creator, name, price, store_id) values ('Caravaggio', 'Decapitação de João Batista', 123456.54, 2);
-insert into product (creator, name, price, store_id) values ('Peter Paul Rubens', 'O Massacre dos Inocentes', 923456.54, 2);
-insert into product (creator, name, price, store_id) values ('Rafael', 'A escola de Atenas', 823456.54, 2);
-insert into product (creator, name, price, store_id) values ('Francisco de Goya', 'Os fuzilamentos de três de Maio', 312345.43, 2);
-insert into product (creator, name, price, store_id) values ('Édouard Manet', 'Olympia', 72345.43, 2);
-insert into product (creator, name, price, store_id) values ('Leonardo da Vinci', 'A última Ceia', 25434.56, 3);
-insert into product (creator, name, price, store_id) values ('Jan van Eyck', 'O Casal Arnolfini', 3456776.54, 3);
-insert into product (creator, name, price, store_id) values ('Sandro Botticelli', 'O nascimento de Vênus', 35432.34, 3);
-insert into product (creator, name, price, store_id) values ('Johannes Vermeer', 'Moça com o Brinco de Pérola', 412345.43, 3);
-insert into product (creator, name, price, store_id) values ('Edvard Munch', 'O Grito', 51234.32, 3);
-insert into product (creator, name, price, store_id) values ('Vincent van Gogh', 'Terraço do Café à Noite', 12345.43, 3);
-insert into product (creator, name, price, store_id) values ('Georges Seurat', 'Uma Tarde de Domingo na Ilha de Grande Jatte', 612342.32, 3);
-insert into product (creator, name, price, store_id) values ('Pierre-Auguste Renoir', 'O baile no moulin de la Galette', 71234.23, 4);
-insert into product (creator, name, price, store_id) values ('Vincent van Gogh', 'Noite Estrelada', 841234.87, 4);
-insert into product (creator, name, price, store_id) values ('René Magritte', 'O Filho do Homem', 876567.98, 4);
-insert into product (creator, name, price, store_id) values ('Wassily Kandinsky', 'Composição VIII', 2345432.32, 4);
-insert into product (creator, name, price, store_id) values ('Claude Monet', 'Nenúfares', 2345123.37, 4);
-insert into product (creator, name, price, store_id) values ('Henri Matisse', 'La Danse', 234564.32, 4);
-insert into product (creator, name, price, store_id) values ('Vincent van Gogh', 'Doze girassóis numa jarra', 432234.56, 5);
-insert into product (creator, name, price, store_id) values ('René Magritte', 'A Traição das Imagens', 23454.32, 5);
-insert into product (creator, name, price, store_id) values ('Salvador Dalí', 'A Persistência da Memória', 43212.34, 5);
-insert into product (creator, name, price, store_id) values ('Jackson Pollock', 'No. 5', 123456.54, 5);
-insert into product (creator, name, price, store_id) values ('Grant Wood', 'American Gothic', 234545.12, 5);
-insert into product (creator, name, price, store_id) values ('Gustav Klimt', 'O beijo', 123456.48, 5);
+LOCK TABLES `product` WRITE;
+/*!40000 ALTER TABLE `product` DISABLE KEYS */;
+INSERT INTO `product` VALUES (34,'Leonardo da Vinci','Mona Lisa﻿',765434.56,'2020-10-13 17:16:46',NULL,NULL,11),(35,'Michelangelo Buonarotti','A Criação de Adão',93453.43,'2020-10-13 17:16:46',NULL,NULL,11),(36,'Caravaggio','Medusa',598765.43,'2020-10-13 17:16:46',NULL,NULL,11),(37,'Diego Velázquez','As Meninas',72345.43,'2020-10-13 17:16:46',NULL,NULL,11),(38,'Rembrandt','A Ronda Noturna',8234565.43,'2020-10-13 17:16:46',NULL,NULL,11),(39,'Pablo Picasso','Guernica',72345.43,'2020-10-13 17:17:17',NULL,NULL,11),(40,'Leonardo da Vinci','Mona Lisa﻿',765434.56,'2020-10-13 17:17:51',NULL,NULL,11);
+/*!40000 ALTER TABLE `product` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2020-10-13 19:23:37
