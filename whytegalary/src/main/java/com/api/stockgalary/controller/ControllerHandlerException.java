@@ -14,10 +14,23 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.DefaultResponseErrorHandler;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+/**
+ * final error control class and creates friendly response. has the
+ * ControllerAdvice.
+ * 
+ * @author FaunoGuazina
+ */
 @ControllerAdvice
 final class ControllerHandlerException extends DefaultResponseErrorHandler {
 
-	ControllerHandlerException() {}
+	/**
+	 * standard empty constructors with access only by package
+	 */
+	ControllerHandlerException() {
+	}
+
+// 3 simple methods of handling 404, 40X and 50X errors
+	// catch exception, return http status and response body method returns string
 
 	@ExceptionHandler(ServletException.class)
 	@ResponseStatus(value = HttpStatus.NOT_FOUND)

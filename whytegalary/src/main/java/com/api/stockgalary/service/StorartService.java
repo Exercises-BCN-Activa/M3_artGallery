@@ -8,14 +8,29 @@ import org.springframework.stereotype.Service;
 import com.api.stockgalary.dao.IStorart;
 import com.api.stockgalary.dto.Storart;
 
+/**
+ * public final class of implementation service that offers access to Storart
+ * DAO class methods, implements the CRUD method interface and invokes DAO class
+ * via auto wired notation.
+ * 
+ * @author FaunoGuazina
+ *
+ */
 @Service
 public final class StorartService implements IService<Storart> {
 
+	/**
+	 * standard empty constructors with access only by package
+	 */
 	StorartService() {
 	}
 
+// DAO CLASS variable
+
 	@Autowired
 	private IStorart dao;
+
+// Methods CRUD
 
 	@Override
 	public Storart saveOne(Storart storart) {
@@ -42,12 +57,16 @@ public final class StorartService implements IService<Storart> {
 		dao.deleteById(id);
 	}
 
+// Methods by DAO class
+
 	public String deleteAllAndEverything(String password) {
 		boolean erase = PASSWORD.equals(password);
 		if (erase) {
 			dao.deleteAll();
 		}
-		return erase ? "Opps! There was never anything here." : "I'm really sorry, but I think you got it wrong";
+		return erase 
+				? "Opps! There was never anything here." 
+				: "I'm really sorry, but I think you got it wrong";
 	}
 
 	public List<Storart> readByName(String name) {
@@ -74,5 +93,8 @@ public final class StorartService implements IService<Storart> {
 		return dao.findDistinctByInventoryTitleContains(title);
 	}
 
+	/**
+	 * password to delete everything, private and final attribute
+	 */
 	private final String PASSWORD = "Sense Deixar Rastre";
 }

@@ -2,6 +2,15 @@ package com.api.stockgalary.service;
 
 import java.util.List;
 
+/**
+ * interface that make up a basic system of methods that meets simple CRUD
+ * requirements
+ * 
+ * @author FaunoGuazina
+ *
+ * @param <T> generic class that assists in the construction of method
+ *            parameters
+ */
 interface IService<T> {
 
 	// ------------------------------// CRUD Methods
