@@ -9,11 +9,29 @@ import org.springframework.stereotype.Service;
 import com.api.stockgalary.dao.IArtifacty;
 import com.api.stockgalary.dto.Artifacty;
 
+/**
+ * public final class of implementation service that offers access to Artifacty
+ * DAO class methods, implements the CRUD method interface and invokes DAO class
+ * via auto wired notation.
+ * 
+ * @author FaunoGuazina
+ *
+ */
 @Service
-public class ArtifactyService implements IService<Artifacty> {
+public final class ArtifactyService implements IService<Artifacty> {
+
+	/**
+	 * standard empty constructors with access only by package
+	 */
+	ArtifactyService() {
+	}
+
+// DAO CLASS variable
 
 	@Autowired
 	private IArtifacty dao;
+
+// Methods CRUD
 
 	@Override
 	public Artifacty saveOne(Artifacty artifacty) {
@@ -39,6 +57,8 @@ public class ArtifactyService implements IService<Artifacty> {
 	public void deleteOne(Long id) {
 		dao.deleteById(id);
 	}
+
+// Methods by DAO class
 
 	public String deleteAllAndEverything(Long shopId, String password) {
 		boolean erase = PASSWORD.equals(password);
@@ -78,6 +98,9 @@ public class ArtifactyService implements IService<Artifacty> {
 		return dao.findByValueGreaterThan(value);
 	}
 
+	/**
+	 * password to delete everything, private and final attribute
+	 */
 	private final String PASSWORD = "Incendiar Quadres";
 
 }

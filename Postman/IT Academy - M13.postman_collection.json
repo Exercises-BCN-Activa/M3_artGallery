@@ -41,7 +41,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"BCN White Art\",\n\t\"capacity\": 33\n}",
+							"raw": "{\n\t\"name\": \"Whitart Galery Barcelona\",\n\t\"capacity\": 0\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -70,7 +70,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"name\": \"BCN WhiteGalery\",\n\t\"capacity\": 35\n}",
+							"raw": "{\n\t\"name\": \"BCN WhiteGalery\",\n\t\"capacity\": 666660\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -78,14 +78,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{IP}}{{PORT}}{{API}}galleries?id=1",
+							"raw": "{{IP}}{{PORT}}{{API}}galleries?id=7",
 							"host": [
 								"{{IP}}{{PORT}}{{API}}galleries"
 							],
 							"query": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "7"
 								}
 							]
 						}
@@ -103,24 +103,20 @@
 								"value": ""
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"name\": \"BCN WhiteGalery\",\n\t\"capacity\": 5\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "{{IP}}{{PORT}}{{API}}galleries?id=1",
+							"raw": "localhost:8181/api/galleries?id=16",
 							"host": [
-								"{{IP}}{{PORT}}{{API}}galleries"
+								"localhost"
+							],
+							"port": "8181",
+							"path": [
+								"api",
+								"galleries"
 							],
 							"query": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "16"
 								}
 							]
 						}
@@ -133,7 +129,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{IP}}{{PORT}}{{API}}galleries/search?by=id&id=1",
+							"raw": "{{IP}}{{PORT}}{{API}}galleries/search?by=id&id=6",
 							"host": [
 								"{{IP}}{{PORT}}{{API}}galleries"
 							],
@@ -147,7 +143,7 @@
 								},
 								{
 									"key": "id",
-									"value": "1"
+									"value": "6"
 								}
 							]
 						}
@@ -328,12 +324,18 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{IP}}{{PORT}}{{API}}galleries/run",
+							"raw": "{{IP}}{{PORT}}{{API}}galleries/run?password=Sense Deixar Rastre",
 							"host": [
 								"{{IP}}{{PORT}}{{API}}galleries"
 							],
 							"path": [
 								"run"
+							],
+							"query": [
+								{
+									"key": "password",
+									"value": "Sense Deixar Rastre"
+								}
 							]
 						}
 					},
@@ -374,14 +376,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{IP}}{{PORT}}{{API}}artefacts?id=1",
+							"raw": "{{IP}}{{PORT}}{{API}}artefacts?id=9",
 							"host": [
 								"{{IP}}{{PORT}}{{API}}artefacts"
 							],
 							"query": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "9"
 								}
 							]
 						}
@@ -394,7 +396,7 @@
 						"method": "PUT",
 						"header": [],
 						"url": {
-							"raw": "{{IP}}{{PORT}}{{API}}artefacts?id=31",
+							"raw": "{{IP}}{{PORT}}{{API}}artefacts?id=31&value=10000.00",
 							"host": [
 								"{{IP}}{{PORT}}{{API}}artefacts"
 							],
@@ -415,13 +417,12 @@
 								},
 								{
 									"key": "shopId",
-									"value": "2",
+									"value": "6",
 									"disabled": true
 								},
 								{
 									"key": "value",
-									"value": "10000.00",
-									"disabled": true
+									"value": "10000.00"
 								}
 							]
 						}
@@ -476,6 +477,60 @@
 					"response": []
 				},
 				{
+					"name": "Read by AUTHOR",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}artefacts/search?by=author&name=caravaggio",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}artefacts"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "by",
+									"value": "author"
+								},
+								{
+									"key": "name",
+									"value": "caravaggio"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read by TITLE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}artefacts/search?by=title&name=mona",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}artefacts"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "by",
+									"value": "title"
+								},
+								{
+									"key": "name",
+									"value": "mona"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Read by SHOP NAME",
 					"request": {
 						"method": "GET",
@@ -508,7 +563,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{IP}}{{PORT}}{{API}}artefacts/search?by=shop&id=5",
+							"raw": "{{IP}}{{PORT}}{{API}}artefacts/search?by=shop&id=7",
 							"host": [
 								"{{IP}}{{PORT}}{{API}}artefacts"
 							],
@@ -522,7 +577,7 @@
 								},
 								{
 									"key": "id",
-									"value": "5"
+									"value": "7"
 								}
 							]
 						}
@@ -613,6 +668,30 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Fire in the gallery",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{IP}}{{PORT}}{{API}}artefacts/burn/7?password=Incendiar Quadres",
+							"host": [
+								"{{IP}}{{PORT}}{{API}}artefacts"
+							],
+							"path": [
+								"burn",
+								"7"
+							],
+							"query": [
+								{
+									"key": "password",
+									"value": "Incendiar Quadres"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -620,17 +699,17 @@
 	],
 	"variable": [
 		{
-			"id": "d9d0ebfc-e302-43ca-9e2b-758b0f294b0a",
+			"id": "169027a9-b103-4405-b26b-489cb3235a6c",
 			"key": "IP",
 			"value": "localhost:"
 		},
 		{
-			"id": "4e6ed0a2-83d7-4bc3-94ba-e092d94533e7",
+			"id": "41b5a7a0-e366-40bf-8bdb-37e9e4bc5d52",
 			"key": "PORT",
 			"value": "8181"
 		},
 		{
-			"id": "45a3bcb5-71ab-4e17-9099-394dd15cd8d6",
+			"id": "0e8f930a-15a8-4e09-9ec3-46a9bb00bfab",
 			"key": "API",
 			"value": "/api/"
 		}

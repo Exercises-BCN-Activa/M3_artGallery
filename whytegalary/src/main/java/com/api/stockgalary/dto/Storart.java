@@ -3,9 +3,9 @@ package com.api.stockgalary.dto;
 import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,9 +15,18 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+/**
+ * DTO class that mimics the art shops entity
+ * 
+ * @author FaunoGuazina
+ */
 @Entity
 @Table(name = "store")
 public class Storart {
+
+//INDEX METHODS -> Attributes - Constructors - Getters - Setters - Hash/equals/toString
+
+//Attributes and Notations 
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,18 +38,35 @@ public class Storart {
 	@Column(name = "capacity")
 	private Integer capacity;
 
-	@OneToMany
+	/**
+	 * mappedBy = "store" -> I can't do this good practice
+	 */
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, targetEntity = Artifacty.class) // mappedBy = "store"
 	@JoinColumn(name = "id")
 	private List<Artifacty> inventory;
 
+	/**
+	 * empty standard constructor
+	 */
 	public Storart() {
 	}
 
+	/**
+	 * Constructor with the minimum parameters necessary to build an object of this
+	 * DTO entity
+	 * 
+	 * @param id       if null the MySQL server will be provide an auto increment
+	 *                 one.
+	 * @param name     string name of painter of store
+	 * @param capacity integer number of stock capacity of this store
+	 */
 	public Storart(Long id, String name, Integer capacity) {
 		this.id = id;
 		this.name = name;
 		this.capacity = capacity;
 	}
+
+// GETTERS =========>
 
 	public Long getId() {
 		return id;
@@ -54,6 +80,14 @@ public class Storart {
 		return capacity;
 	}
 
+	@JsonIgnore
+	@JoinColumn(name = "id")
+	public List<Artifacty> getInventory() {
+		return inventory;
+	}
+
+// SETTERS =========>
+
 	public void setId(Long id) {
 		this.id = id;
 	}
@@ -66,15 +100,11 @@ public class Storart {
 		this.capacity = capacity;
 	}
 
-	@JsonIgnore
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "Artifacty")
-	public List<Artifacty> getInventory() {
-		return inventory;
-	}
-
 	public void setInventory(List<Artifacty> inventory) {
 		this.inventory = inventory;
 	}
+
+// HASH - EQUALS - toSTRING =========>
 
 	@Override
 	public int hashCode() {
